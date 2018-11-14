@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/DennisOnder/websockets-crash-course/issues"
   },
-  "homepage": "https://github.com/DennisOnder/websockets-crash-course#readme"
+  "homepage": "https://github.com/DennisOnder/websockets-crash-course#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  }
 }
