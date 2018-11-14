@@ -1,0 +1,19 @@
+{
+  "name": "websockets-crash-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennisOnder/websockets-crash-course.git"
+  },
+  "author": "Dennis Onder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DennisOnder/websockets-crash-course/issues"
+  },
+  "homepage": "https://github.com/DennisOnder/websockets-crash-course#readme"
+}
