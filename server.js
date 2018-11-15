@@ -6,7 +6,7 @@ const mongoURI = 'mongodb://root:root123@ds039351.mlab.com:39351/socket_io-crash
 mongo.connect(mongoURI, { useNewUrlParser: true }, (err, client) => {
   if(err) {
     throw err;
-  } else {    
+  } else {
     console.log('Database connected');
   }
   // Connect to Socket.io
