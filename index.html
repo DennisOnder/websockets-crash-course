@@ -12,6 +12,9 @@
     #messages {
       height: 300px;
     }
+    .chat-message {
+      padding: 10px 0 0 10px;
+    }
   </style>
 </head>
 
@@ -68,7 +71,46 @@
       if (socket !== undefined) {
         console.log('Connected To Socket.io.');
         socket.on('output', function (data) {
-          console.log(data);
+          // Check if there's any messages
+          if (data.length) {
+            for (var i = 0; i < data.length; i++) {
+              // Build out message <div>
+              var message = document.createElement('div');
+              message.setAttribute('class', 'chat-message');
+              message.textContent = data[i].name + ': ' + data[i].message;
+              messages.appendChild(message);
+              messages.insertBefore(message, messages.firstChild);
+            }
+          }
+        })
+        // Get status from server
+        socket.on('status', function (data) {
+          setStatus((typeof data === 'object') ? data.message : data);
+          // If it's clear, clear text
+          if (data.clear) {
+            textarea.value = '';
+          }
+        });
+        // Handle input
+        textarea.addEventListener('keydown', function (e) {
+          if (e.keyCode === 13 || e.which === 13) {
+            var nameValue = username.value;
+            var messageValue = textarea.value;
+            if (nameValue === '' && messageValue === '') {
+              // Fuck shit up
+            } else {
+              var newMessage = {
+                name: nameValue,
+                message: messageValue
+              };
+              socket.emit('input', newMessage);
+              e.preventDefault();
+            };
+          };
+        });
+        // Handle clear
+        clearBtn.addEventListener('click', function () {
+          socket.emit('clear', {});
         })
       } else {
         console.log('Connection Denied.');

@@ -38,6 +38,7 @@ mongoose.connect('mongodb://test:test1234@ds039351.mlab.com:39351/socket_io-cras
             // Send status
             sendStatus({ message: 'Message sent!', clear: true });
           });
+          console.log(data);
         };
       });
       // Handle clear
