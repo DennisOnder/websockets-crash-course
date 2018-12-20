@@ -111,6 +111,9 @@
         // Handle clear
         clearBtn.addEventListener('click', function () {
           socket.emit('clear', {});
+          username.value = '';
+          textarea.value = '';
+          messages.innerHTML = '';
         })
       } else {
         console.log('Connection Denied.');
