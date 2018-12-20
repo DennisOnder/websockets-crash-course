@@ -39,7 +39,41 @@
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
-
+  <script>
+    (function () {
+      // Element function
+      var element = function (id) {
+        return document.getElementById(id);
+      };
+      // Elements
+      var status = element('status');
+      var messages = element('messages');
+      var textarea = element('textarea');
+      var username = element('username');
+      var clearBtn = element('clear');
+      var chat = element('chat');
+      // Get status
+      var statusDefault = status.textContent;
+      // Set status
+      var setStatus = function (currentStatus) {
+        status.textContent = currentStatus;
+        if (currentStatus !== statusDefault) {
+          var delay = setTimeout(function () { setStatus(statusDefault) }, 4000);
+        };
+      };
+      // Socket.io
+      // Connect to Socket.io
+      var socket = io.connect('http://localhost:8000');
+      // Check connection
+      if (socket !== undefined) {
+        console.log('Connected To Socket.io.');
+        socket.on('output', function (data) {
+          console.log(data);
+        })
+      } else {
+        console.log('Connection Denied.');
+      }
+    })();
   </script>
 </body>
 

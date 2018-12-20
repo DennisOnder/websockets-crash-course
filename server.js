@@ -1,15 +1,15 @@
 const port = process.env.PORT || 8000;
 const io = require('socket.io').listen(port).sockets;
-const mongo = require('mongodb').MongoClient;
-const mongoURI = 'mongodb://root:root123@ds039351.mlab.com:39351/socket_io-crash-course';
+const mongoose = require('mongoose');
 
 // Connect to MongoDB
-mongo.connect(mongoURI, {useNewUrlParser: true}, (err, db) => {
-  if (err) {
+mongoose.connect('mongodb://test:test1234@ds039351.mlab.com:39351/socket_io-crash-course', { useNewUrlParser: true }, (err, db) => {
+  if(err) {
     throw err;
   } else {
+    console.log('MongoDB Connected!');
     // Connect to Socket.io
-    io.on('connection', () => {
+    io.on('connection', socket => {
       let chat = db.collection('chats');
       // Create function to send status
       sendStatus = function(status) {
@@ -48,6 +48,5 @@ mongo.connect(mongoURI, {useNewUrlParser: true}, (err, db) => {
         })
       });
     });
-    console.log('MongoDB Connection Established.')
-  };
-})
+  }
+});
